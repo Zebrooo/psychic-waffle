@@ -1,20 +1,26 @@
 import './styles.css';
-import s from './app.module.css';
-import reactImage from './images/react.png';
-import { ReactComponent as LogoIcon } from './images/logo.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import HomePage from '../pages/homePage';
+import Header from '../components/header';
+import Footer from '../components/footer';
+import { postData } from '../data';
 
 export const App = () => {
-	// const num = 0
-	const [count, setCount] = useState(0);
+	const [posts, setPosts] = useState<Post[]>([]);
+
+	useEffect(() => {
+		setPosts(postData);
+	}, []);
+
+	const handlePostDelete = (id: string) => {
+		const filteredPosts = posts.filter((el) => el._id !== id);
+		setPosts(filteredPosts);
+	};
 	return (
 		<>
-			<LogoIcon className={s.root__icon} />
-			<img className={s.root__image} src={reactImage} alt='test' />
-			<h1 className={s.root}>React Typescript Webpack</h1>
-			<button className='test' onClick={() => setCount((c) => c + 1)}>
-				Count- {count}
-			</button>
+			<Header />
+			<HomePage posts={posts} onPostDelete={handlePostDelete} />
+			<Footer />
 		</>
 	);
 };
