@@ -1,7 +1,7 @@
 export {};
 
 declare global {
-	type PostLikeParam = {
+	type ProductLikeParam = {
 		_id: string;
 		likes: string[];
 	};
@@ -14,15 +14,15 @@ declare global {
 		__v?: number;
 		group?: string;
 	}
-	interface CommentPost {
+	interface CommentProduct {
 		_id: string;
 		text: string;
 		author?: User;
-		post?: Post;
+		product?: Product;
 		created_at?: string;
 		updated_at?: string;
 	}
-	interface Post {
+	interface Product {
 		_id: string;
 		name: string;
 		price: number;
@@ -33,6 +33,7 @@ declare global {
 		isCart: boolean;
 		available: boolean;
 		stock: number;
-		picture: string;
+		pictures: string;
+		reviews: CommentProduct[];
 	}
 }

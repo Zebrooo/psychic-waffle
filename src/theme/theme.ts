@@ -2,6 +2,14 @@ import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
 	components: {
+		MuiAppBar: {
+			styleOverrides: {
+				root: {
+					backgroundColor: '#03fc98',
+					padding: '10px',
+				},
+			},
+		},
 		MuiButton: {
 			styleOverrides: {
 				root: {

@@ -1,29 +1,34 @@
-// import { Masonry } from '@mui/lab';
 import { Grid, Stack, Typography, Pagination } from '@mui/material';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import usePagination from '../../hooks/usePagination';
-import PostCard from '../post-card';
+import api from '../../services/api';
+import Product from '../product';
 
-interface IpostListProps {
-	posts: Post[];
-	onPostDelete: (id: string) => void;
-}
+// interface IpostListProps {
+// 	posts: Product[];
+// 	onPostDelete: (id: string) => void;
+// }
 
-const PostList: React.FC<IpostListProps> = ({ posts, onPostDelete }) => {
+const PostList: React.FC = () => {
+	const [allProducts, setAllProducts] = useState<Product[]>([]);
 	const perPage = 6;
 	const { currentPage, getCurrentData, countPage, setPaginate } =
-		usePagination<Post>(posts, perPage);
+		usePagination<Product>(allProducts, perPage);
+	useEffect(() => {
+		api
+			.getAllProducts({
+				query: 'product',
+				page: currentPage,
+				limit: 100,
+			})
+			.then((productData) => setAllProducts(productData.products));
+	}, [currentPage]);
 
 	const handlePageChange = (e: ChangeEvent<unknown>, page: number) => {
 		setPaginate(page);
 	};
 	return (
 		<>
-			{/* <Masonry columns={{ xs: 1, sm: 2, md: 3, lg: 4 }} spacing={2}>
-				{posts.map((el) => (
-					<PostCard key={el._id} onPostDelete={onPostDelete} {...el} />
-				))}
-			</Masonry> */}
 			<Grid container spacing={2}>
 				{getCurrentData().map((el) => (
 					<Grid
@@ -34,7 +39,7 @@ const PostList: React.FC<IpostListProps> = ({ posts, onPostDelete }) => {
 						sm={6}
 						md={4}
 						lg={3}>
-						<PostCard onPostDelete={onPostDelete} {...el} />
+						<Product {...el} />
 					</Grid>
 				))}
 			</Grid>
