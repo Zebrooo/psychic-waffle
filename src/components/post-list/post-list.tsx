@@ -22,7 +22,7 @@ const PostList: React.FC = () => {
 				limit: 100,
 			})
 			.then((productData) => setAllProducts(productData.products));
-	}, [currentPage]);
+	}, []);
 
 	const handlePageChange = (e: ChangeEvent<unknown>, page: number) => {
 		setPaginate(page);
