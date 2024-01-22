@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Card, CardHeader, CardMedia, Button } from '@mui/material';
 import { useDispatch } from '../../services/Redux/hooks';
-import { addToCart } from '../../services/Redux/reducers/cartReducer';
+import { addToCart } from '../../services/Redux/cartSlice/cartSlice';
 
 const ProductItem: FC<Product> = ({
 	name,

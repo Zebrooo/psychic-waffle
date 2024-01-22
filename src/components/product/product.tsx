@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useDispatch } from '../../services/Redux/hooks';
-import { addToCart } from '../../services/Redux/reducers/cartReducer';
+import { addToCart } from '../../services/Redux/cartSlice/cartSlice';
 
 export function CloseIcon(props: SvgIconProps) {
 	return (

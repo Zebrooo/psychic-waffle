@@ -19,9 +19,8 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
 				sx={{ backgroundColor: '#FFE44D', color: 'black' }}
 				position='static'>
 				<Toolbar>
-					<NavLink to='/'>{'logo'}</NavLink>
-					<Box sx={{ flexGrow: 1 }} />{' '}
-					{/* Расширяем пространство между логотипом и иконками */}
+					<NavLink to='/home'>{'logo'}</NavLink>
+					<Box sx={{ flexGrow: 1 }} />
 					{children}
 					<Box sx={{ display: { xs: 'none', md: 'flex' } }}>
 						<IconButton size='large' sx={{ color: 'black' }}>

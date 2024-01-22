@@ -1,7 +1,7 @@
 import { Grid, Stack, Typography, Pagination } from '@mui/material';
-import { ChangeEvent, useEffect, useState } from 'react';
-import usePagination from '../../hooks/usePagination';
-import api from '../../services/api';
+import { useState } from 'react';
+// import usePagination from '../../hooks/usePagination';
+import { useGetProductDataQuery } from '../../services/Redux/ApiSlice/ApiSlice';
 import Product from '../product';
 
 // interface IpostListProps {
@@ -10,27 +10,27 @@ import Product from '../product';
 // }
 
 const PostList: React.FC = () => {
-	const [allProducts, setAllProducts] = useState<Product[]>([]);
-	const perPage = 6;
-	const { currentPage, getCurrentData, countPage, setPaginate } =
-		usePagination<Product>(allProducts, perPage);
-	useEffect(() => {
-		api
-			.getAllProducts({
-				query: 'product',
-				page: currentPage,
-				limit: 100,
-			})
-			.then((productData) => setAllProducts(productData.products));
-	}, []);
+	// const perPage = 6;
+	const [page, setPage] = useState(1);
 
-	const handlePageChange = (e: ChangeEvent<unknown>, page: number) => {
-		setPaginate(page);
-	};
+	const { data, error, isLoading } = useGetProductDataQuery({
+		query: 'product',
+		page: page,
+		limit: 10,
+	});
+	// const { currentPage, getCurrentData, countPage, setPaginate } =
+	// 	usePagination<Product>(data.products, perPage);
+	if (isLoading) return <div>Загрузка...</div>;
+	if (error) return <div>{error.toString()}</div>;
+
+	// const handlePageChange = (e: ChangeEvent<unknown>, page: number) => {
+	// 	setPaginate(page);
+	// };
+
 	return (
 		<>
 			<Grid container spacing={2}>
-				{getCurrentData().map((el) => (
+				{data.products.map((el: Product) => (
 					<Grid
 						key={el._id}
 						item
@@ -43,14 +43,25 @@ const PostList: React.FC = () => {
 					</Grid>
 				))}
 			</Grid>
-			<Stack spacing={2} sx={{ marginTop: 2 }}>
-				<Typography> Страница: {currentPage}</Typography>
+			<div>
+				<button
+					onClick={() => setPage((current: number) => current - 1)}
+					disabled={page === 1}>
+					Назад
+				</button>
+				<span>Страница {page}</span>
+				<button onClick={() => setPage((current: number) => current + 1)}>
+					Вперед
+				</button>
+			</div>
+			{/* <Stack spacing={2} sx={{ marginTop: 2 }}> */}
+			{/* <Typography> Страница: {currentPage}</Typography>
 				<Pagination
 					count={countPage}
 					page={currentPage}
 					onChange={handlePageChange}
 				/>
-			</Stack>
+			</Stack> */}
 		</>
 	);
 };

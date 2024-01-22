@@ -10,13 +10,13 @@ import {
 } from '@mui/material';
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { CartItem } from '../../services/Redux/types/types';
+import AddIcon from '@mui/icons-material/Add';
 import {
 	addToCart,
 	decreaseCart,
 	removeFromCart,
-} from '../../services/Redux/reducers/cartReducer';
-import { CartItem } from '../../services/Redux/types/types';
-import AddIcon from '@mui/icons-material/Add';
+} from '../../services/Redux/cartSlice/cartSlice';
 
 interface CartItemProps {
 	item: CartItem;

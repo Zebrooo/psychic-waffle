@@ -1,34 +1,45 @@
 import { Box, Paper, Grid, Avatar, Typography, Button } from '@mui/material';
-import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserContext, UserContextInterface } from '../../context/user-context';
+import { useDispatch, useSelector } from '../../services/Redux/hooks';
+import { RootState } from '../../services/Redux/store';
+import { clearUser } from '../../services/Redux/userSlice/userSlice';
 
 export default function Profile() {
-	const { name, avatar, email, group, about } = useContext(
-		UserContext
-	) as UserContextInterface;
+	const dispatch = useDispatch();
+	const user = useSelector((state: RootState) => state.user.user);
+	console.log(user);
 	const navigate = useNavigate();
 	const goBack = () => {
 		navigate(-1);
 	};
+	const exitHandler = () => {
+		dispatch(clearUser());
+		navigate('/signin');
+	};
+	if (!user) {
+		return <div>Пользователь не найден</div>;
+	}
 	return (
 		<>
 			<Box sx={{ flexGrow: 1, p: 2 }}>
 				<Button onClick={goBack}>Назад</Button>
+				<Button sx={{ marginRight: '20px' }} onClick={exitHandler}>
+					Выйти из учетной записи
+				</Button>
 				<Paper elevation={3} sx={{ p: 2 }}>
 					<Grid container spacing={2} alignItems='center'>
 						<Grid item xs={12} sm={3}>
 							<Avatar
-								alt={name}
-								src={avatar}
+								alt={user.name || 'Аватар пользователя'}
+								src={user.avatar || 'путь-к-изображению-по-умолчанию'}
 								sx={{ width: 150, height: 150 }}
 							/>
 						</Grid>
 						<Grid item xs={12} sm={9}>
-							<Typography variant='h5'>{name}</Typography>
-							<Typography variant='subtitle1'>Email: {email}</Typography>
-							<Typography variant='subtitle1'>Группа: {group}</Typography>
-							<Typography variant='subtitle1'>О себе: {about}</Typography>
+							<Typography variant='h5'>{user.name}</Typography>
+							<Typography variant='subtitle1'>Email: {user.email}</Typography>
+							<Typography variant='subtitle1'>Группа: {user.group}</Typography>
+							<Typography variant='subtitle1'>О себе: {user.about}</Typography>
 						</Grid>
 					</Grid>
 				</Paper>
