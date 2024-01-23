@@ -69,9 +69,6 @@ export class Api {
 			headers: this.headers,
 		}).then(this.onResponse);
 	}
-	// getAllInfo() {
-	// 	return Promise.all([this.getUsers(), this.getAllProducts()]);
-	// }
 }
 
 const api = new Api({

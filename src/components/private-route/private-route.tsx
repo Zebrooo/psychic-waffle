@@ -4,7 +4,6 @@ import useAuth from '../../hooks/useAuth';
 
 interface PrivateRouteProps {
 	component: ComponentType<any>;
-	// path: string;
 }
 
 const PrivateRoute: FC<PrivateRouteProps> = ({ component: Component }) => {
