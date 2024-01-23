@@ -6,4 +6,4 @@ export function setColorForIcon(likes: string[], id: string) {
 	let iconLikeColor = '';
 	like ? (iconLikeColor = 'red') : (iconLikeColor = 'black');
 	return iconLikeColor;
-};
+}

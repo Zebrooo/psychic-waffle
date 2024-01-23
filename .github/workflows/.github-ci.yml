@@ -1,28 +1,24 @@
-default:
-  image: node:18
-  cache:
-    key:
-      files:
-        - package-lock.json
-      paths:
-        - node_modules/
+name: Node.js CI
 
-stages:
-  - build
-  - test
-  - deploy
+on:
+  push:
+    branches: [dz4]
+  pull_request:
+    branches: [dz4]
 
-install_dependencies:
-  stage: build
-  script:
-    - npm install
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-build_job:
-  stage: build
-  script:
-    - npm run build
-  artifacts:
-    paths:
-      - dist/
-  needs:
-    - install_dependencies
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm run build
+      - run: npm test
