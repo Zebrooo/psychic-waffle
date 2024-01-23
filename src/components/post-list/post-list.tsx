@@ -1,36 +1,38 @@
-import { Grid, Stack, Typography, Pagination } from '@mui/material';
-import { useState } from 'react';
-// import usePagination from '../../hooks/usePagination';
+import { Grid, Container } from '@mui/material';
+import { useCallback, useState } from 'react';
 import { useGetProductDataQuery } from '../../services/Redux/ApiSlice/ApiSlice';
 import Product from '../product';
+import LoadMore from '../shared/LoadMore/LoadMore';
 
-// interface IpostListProps {
-// 	posts: Product[];
-// 	onPostDelete: (id: string) => void;
-// }
+interface PostsSearchFilter {
+	searchPhrase: string;
+	page: number;
+}
 
 const PostList: React.FC = () => {
-	// const perPage = 6;
-	const [page, setPage] = useState(1);
+	const [postsSearchFilter, setPostsSearchFilter] = useState<PostsSearchFilter>(
+		{
+			searchPhrase: 'Products',
+			page: 1,
+		}
+	);
 
-	const { data, error, isLoading } = useGetProductDataQuery({
-		query: 'product',
-		page: page,
-		limit: 10,
+	const { data, error, isLoading, isFetching } = useGetProductDataQuery({
+		query: postsSearchFilter.page,
+		page: postsSearchFilter.page,
 	});
-	// const { currentPage, getCurrentData, countPage, setPaginate } =
-	// 	usePagination<Product>(data.products, perPage);
+	const isEndOfList = data && data.products.length >= data.total;
+	const loadMorePosts = useCallback(() => {
+		if (!isEndOfList) {
+			setPostsSearchFilter((prev) => ({ ...prev, page: prev.page + 1 }));
+		}
+	}, [isEndOfList]);
 	if (isLoading) return <div>Загрузка...</div>;
 	if (error) return <div>{error.toString()}</div>;
-
-	// const handlePageChange = (e: ChangeEvent<unknown>, page: number) => {
-	// 	setPaginate(page);
-	// };
-
 	return (
-		<>
+		<Container>
 			<Grid container spacing={2}>
-				{data.products.map((el: Product) => (
+				{data?.products.map((el: Product) => (
 					<Grid
 						key={el._id}
 						item
@@ -43,26 +45,14 @@ const PostList: React.FC = () => {
 					</Grid>
 				))}
 			</Grid>
-			<div>
-				<button
-					onClick={() => setPage((current: number) => current - 1)}
-					disabled={page === 1}>
-					Назад
-				</button>
-				<span>Страница {page}</span>
-				<button onClick={() => setPage((current: number) => current + 1)}>
-					Вперед
-				</button>
-			</div>
-			{/* <Stack spacing={2} sx={{ marginTop: 2 }}> */}
-			{/* <Typography> Страница: {currentPage}</Typography>
-				<Pagination
-					count={countPage}
-					page={currentPage}
-					onChange={handlePageChange}
+			{data?.products?.length && (
+				<LoadMore
+					action={loadMorePosts}
+					isEndOfList={isEndOfList}
+					isLoading={isFetching}
 				/>
-			</Stack> */}
-		</>
+			)}
+		</Container>
 	);
 };
 

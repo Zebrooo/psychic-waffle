@@ -1,0 +1,28 @@
+default:
+  image: node:18
+  cache:
+    key:
+      files:
+        - package-lock.json
+      paths:
+        - node_modules/
+
+stages:
+  - build
+  - test
+  - deploy
+
+install_dependencies:
+  stage: build
+  script:
+    - npm install
+
+build_job:
+  stage: build
+  script:
+    - npm run build
+  artifacts:
+    paths:
+      - dist/
+  needs:
+    - install_dependencies

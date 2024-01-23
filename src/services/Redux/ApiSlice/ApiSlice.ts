@@ -12,8 +12,35 @@ export const apiSlice = createApi({
 	}),
 	endpoints: (builder) => ({
 		getProductData: builder.query({
-			query: (payload: { query: string; page: number; limit: number }) =>
-				`/products?query=${payload.query}&page=${payload.page}&limit=${payload.limit}`,
+			query: ({ query, page }) => ({
+				url: '/products?',
+				params: {
+					page,
+					query,
+					limit: 10,
+				},
+			}),
+			serializeQueryArgs: ({ endpointName, queryArgs: { searchPhraze } }) => {
+				return endpointName + searchPhraze;
+			},
+			merge: (currentCache, newResponse, { arg: { page } }) => {
+				if (page === 1) return;
+				currentCache.products.push(...newResponse.products);
+			},
+			forceRefetch({ currentArg, previousArg }) {
+				return currentArg?.page !== previousArg?.page;
+			},
+			providesTags: (response) => {
+				return response
+					? [
+							...response.products.map(({ id }: { id: string }) => ({
+								type: 'Products' as const,
+								id,
+							})),
+							{ type: 'Products', id: 'PRODUCTS_LIST' },
+					  ]
+					: [{ type: 'Posts', id: 'PRODUCTS_LIST' }];
+			},
 		}),
 		userAuthorization: builder.mutation({
 			query: (userData) => ({
