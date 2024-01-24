@@ -37,8 +37,8 @@ jobs:
       - name: Build
         env:
           API_URL: ${{ secrets.API_URL }}
-          PUBLIC_URL: 'https://username.github.io/reponame' # Пример URL
-          PUBLIC_PATH: '/reponame/' # Пример путь
+          PUBLIC_URL: 'https://github.com/Zebrooo/psychic-waffle.github.io' 
+          PUBLIC_PATH: '/psychic-waffle.github.io' 
         run: npm run build
 
       - name: Deploy
