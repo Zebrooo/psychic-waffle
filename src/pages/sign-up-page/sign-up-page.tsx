@@ -3,9 +3,8 @@ import { useForm } from 'react-hook-form';
 import registrationSchema from '../../utils/userUtils';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRegisterUserMutation } from '../../services/Redux/ApiSlice/ApiSlice';
-import Link from '@mui/material/Link';
 import { TextField, Button, Container, Box, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function SignUpPage() {
 	const {
@@ -46,10 +45,8 @@ export default function SignUpPage() {
 						Зарегистрироваться
 					</Button>
 				</Box>
+				<Link to='/signin'>{'Уже есть аккаунт? Войдите в профиль'}</Link>
 			</Container>
-			<Link href='/signin' sx={{ marginLeft: '30vw' }} variant='body2'>
-				{'Уже есть аккаунт? Войдите в профиль'}
-			</Link>
 		</form>
 	);
 }
