@@ -36,6 +36,7 @@ jobs:
 
       - name: Build
         env:
+          API_URL: ${{ secrets.API_URL }}
           PUBLIC_URL: 'https://username.github.io/reponame' # Пример URL
           PUBLIC_PATH: '/reponame/' # Пример путь
         run: npm run build
