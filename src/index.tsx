@@ -13,7 +13,8 @@ const root = createRoot(domNode);
 
 root.render(
 	<StrictMode>
-		<BrowserRouter basename='/psychic-waffle.github.io'>
+		<BrowserRouter
+			basename={process.env.PUBLIC_PATH ? process.env.PUBLIC_PATH : '/'}>
 			<ThemeProvider theme={theme}>
 				<CssBaseline />
 				<Provider store={store}>
