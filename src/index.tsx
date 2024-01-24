@@ -1,12 +1,12 @@
-import { createRoot } from 'react-dom/client';
-import { App } from './app';
-import { StrictMode } from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import theme from './theme/theme';
+import { ThemeProvider } from '@mui/material/styles';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import { App } from './app';
 import store from './services/Redux/store';
+import theme from './theme/theme';
 
 const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);
