@@ -3,7 +3,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path'); //для того чтобы превратить отнсительный путь в абсолютный мы будем использовать пакет path
 const webpack = require('webpack');
-require('dotenv').config();
+require('dotenv').config({ path: path.resolve(process.env.PWD, '.env') });
 
 const production = process.env.NODE_ENV === 'production';
 
