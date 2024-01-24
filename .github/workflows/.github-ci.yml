@@ -6,10 +6,7 @@ on:
   pull_request:
     branches: [dz4]
 
-env:
-  API_URL: https://api.react-learning.ru/v2/sb-4
-  PUBLIC_URL: https://zebrooo.github.io/psychic-waffle.github.io
-  PUBLIC_PATH: /psychic-waffle.github.io
+
 
 jobs:
   build-and-deploy:
@@ -36,6 +33,9 @@ jobs:
         run: npm install
 
       - name: Build
+      env:
+        PUBLIC_URL: https://zebrooo.github.io/psychic-waffle.github.io
+        PUBLIC_PATH: /psychic-waffle.github.io
         run: npm run build
 
       - name: Deploy
