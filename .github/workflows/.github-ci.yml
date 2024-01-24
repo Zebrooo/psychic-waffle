@@ -36,10 +36,6 @@ jobs:
 
       - name: Build
         run: npm run build
-      - name: Moving distributiv
-        run: mv dist public
-        artifacts:
-          paths: -public
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
