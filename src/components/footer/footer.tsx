@@ -22,7 +22,7 @@ const Footer: React.FC = () => {
 				<Typography variant='body2' color='text.secondary'>
 					{'© '}
 					{new Date().getFullYear()}{' '}
-					<Link color='inherit' href='https://yourwebsite.com/'>
+					<Link color='inherit' href='#'>
 						Your Website
 					</Link>
 					{'.'}
