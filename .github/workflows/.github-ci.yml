@@ -6,9 +6,9 @@ on:
   pull_request:
     branches: [dz4]
 
-env:
-  PUBLIC_URL: https://zebrooo.github.io/psychic-waffle.github.io
-  PUBLIC_PATH: /psychic-waffle.github.io
+# env:
+#   PUBLIC_URL: https://zebrooo.github.io/psychic-waffle.github.io
+#   PUBLIC_PATH: /psychic-waffle.github.io
 
 jobs:
   build-and-deploy:
