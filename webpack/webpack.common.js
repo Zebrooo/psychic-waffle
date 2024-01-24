@@ -84,8 +84,8 @@ module.exports = {
 		}),
 		new webpack.EnvironmentPlugin({
 			NODE_ENV: 'development', // значение по умолчанию 'development' если переменная process.env.NODE_ENV не передана
-			PUBLIC_PATH: '/psychic-waffle.github.io',
-			PUBLIC_URL: 'https://zebrooo.github.io/psychic-waffle.github.io',
+			PUBLIC_PATH: '/psychic-waffle',
+			PUBLIC_URL: 'https://zebrooo.github.io/psychic-waffle/',
 		}),
 	],
 };
