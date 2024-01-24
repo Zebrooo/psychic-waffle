@@ -10,9 +10,10 @@ import store from './services/Redux/store';
 
 const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);
+
 root.render(
 	<StrictMode>
-		<BrowserRouter>
+		<BrowserRouter basename='/psychic-waffle.github.io'>
 			<ThemeProvider theme={theme}>
 				<CssBaseline />
 				<Provider store={store}>
