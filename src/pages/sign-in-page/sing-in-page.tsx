@@ -1,16 +1,9 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import {
-	Box,
-	Button,
-	Container,
-	Link,
-	TextField,
-	Typography,
-} from '@mui/material';
+import { Box, Button, Container, TextField, Typography } from '@mui/material';
 import { useUserAuthorizationMutation } from '../../services/Redux/ApiSlice/ApiSlice';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { setUser } from '../../services/Redux/userSlice/userSlice';
 import { useDispatch } from '../../services/Redux/hooks';
 
@@ -96,9 +89,7 @@ const SignIn = () => {
 						sx={{ mt: 3, mb: 2 }}>
 						Войти
 					</Button>
-					<Link href='/signup' variant='body2'>
-						{'Нет Акаунта? Зарегестрируйтесь'}
-					</Link>
+					<Link to='/signup'>{'Нет Акаунта? Зарегестрируйтесь'}</Link>
 				</Box>
 			</Container>
 		</form>

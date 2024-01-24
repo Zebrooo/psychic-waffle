@@ -11,7 +11,7 @@ console.log(process.env.PUBLIC_PATH);
 module.exports = {
 	entry: path.resolve(__dirname, '..', './src/index.tsx'), //точка входа в наше приложение содержит абсолютный путь к index.ts
 	output: {
-		path: path.resolve(__dirname, '..', './dist'), //путь куда будет собираться наш проект
+		path: path.resolve(__dirname, '..', './public'), //путь куда будет собираться наш проект
 		filename: production
 			? 'static/scripts/[name].[contenthash].js'
 			: 'static/scripts/[name].js', // имя нашего бандла
@@ -84,7 +84,10 @@ module.exports = {
 				: 'static/styles/[name].css',
 		}),
 		new webpack.EnvironmentPlugin({
-			NODE_ENV: 'development', // значение по умолчанию 'development' если переменная process.env.NODE_ENV не передана
+			NODE_ENV: 'development',
+			PUBLIC_PATH: '/psychic-waffle.github.io',
+			PUBLIC_URL: 'https://zebrooo.github.io/psychic-waffle.github.io',
+			// значение по умолчанию 'development' если переменная process.env.NODE_ENV не передана
 		}),
 	],
 };
