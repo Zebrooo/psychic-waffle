@@ -37,7 +37,7 @@ jobs:
       - name: Build
         env:
           API_URL: ${{ secrets.API_URL }}
-          PUBLIC_URL: 'https://zebrooo.github.io/psychic-waffle.github.io/'
+          PUBLIC_URL: 'https://zebrooo.github.io/psychic-waffle.github.io'
           PUBLIC_PATH: '/psychic-waffle.github.io'
         run: npm run build
 
