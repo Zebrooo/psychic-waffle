@@ -6,6 +6,7 @@ const webpack = require('webpack');
 require('dotenv').config({ path: path.resolve(process.env.PWD, '.env') });
 
 const production = process.env.NODE_ENV === 'production';
+console.log(process.env.PUBLIC_PATH);
 
 module.exports = {
 	entry: path.resolve(__dirname, '..', './src/index.tsx'), //точка входа в наше приложение содержит абсолютный путь к index.ts
