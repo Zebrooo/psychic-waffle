@@ -31,10 +31,9 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
 	};
 
 	const handleDecrease = () => {
-		if (item.quantity == 1) {
-			dispatch(removeFromCart(item._id));
-		}
-		dispatch(decreaseCart(item));
+		dispatch(
+			item.quantity == 1 ? removeFromCart(item._id) : decreaseCart(item)
+		);
 	};
 
 	const handleIncrease = () => {

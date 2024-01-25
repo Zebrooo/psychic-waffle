@@ -14,7 +14,11 @@ const root = createRoot(domNode);
 root.render(
 	<StrictMode>
 		<BrowserRouter
-			basename={process.env.PUBLIC_PATH ? process.env.PUBLIC_PATH : '/'}>
+			basename={
+				process.env.REACT_APP_PUBLIC_PATH
+					? process.env.REACT_APP_PUBLIC_PATH
+					: '/'
+			}>
 			<ThemeProvider theme={theme}>
 				<CssBaseline />
 				<Provider store={store}>

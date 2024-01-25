@@ -9,41 +9,39 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 
 interface HeaderProps {
-	children: any;
+	children?: any;
 }
 // Компонент Header
 const Header: React.FC<HeaderProps> = ({ children }) => {
 	return (
-		<Box sx={{ flexGrow: 1, height: '80px', width: '100%' }}>
-			<AppBar
-				sx={{ backgroundColor: '#FFE44D', color: 'black' }}
-				position='static'>
-				<Toolbar>
-					<NavLink to='/home'>{'logo'}</NavLink>
-					<Box sx={{ flexGrow: 1 }} />
-					{children}
-					<Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-						<IconButton size='large' sx={{ color: 'black' }}>
-							<Badge>
-								<NavLink to='/favorite'>
-									<LocalMallIcon />
-								</NavLink>
-							</Badge>
-						</IconButton>
-						<IconButton
-							size='large'
-							edge='end'
-							aria-label='account of current user'
-							aria-haspopup='true'
-							sx={{ color: 'black' }}>
-							<NavLink to='/profile'>
-								<AccountCircle />
+		<AppBar
+			sx={{ backgroundColor: '#FFE44D', color: 'black' }}
+			position='static'>
+			<Toolbar>
+				<NavLink to='/home'>{'logo'}</NavLink>
+				<Box sx={{ flexGrow: 1 }} />
+				{children}
+				<Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+					<IconButton size='large' sx={{ color: 'black' }}>
+						<Badge>
+							<NavLink to='/favorite'>
+								<LocalMallIcon />
 							</NavLink>
-						</IconButton>
-					</Box>
-				</Toolbar>
-			</AppBar>
-		</Box>
+						</Badge>
+					</IconButton>
+					<IconButton
+						size='large'
+						edge='end'
+						aria-label='account of current user'
+						aria-haspopup='true'
+						sx={{ color: 'black' }}>
+						<NavLink to='/profile'>
+							<AccountCircle />
+						</NavLink>
+					</IconButton>
+				</Box>
+			</Toolbar>
+		</AppBar>
 	);
 };
 

@@ -19,10 +19,8 @@ export default function SingleProductPage() {
 		}
 	}, [productId]);
 	return (
-		<>
-			<Container maxWidth='lg'>
-				<ProductItem {...(product as Product)} />
-			</Container>
-		</>
+		<Container maxWidth='lg'>
+			<ProductItem {...(product as Product)} />
+		</Container>
 	);
 }

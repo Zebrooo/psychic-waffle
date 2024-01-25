@@ -1,4 +1,4 @@
-import { Box, Paper, Grid, Avatar, Typography, Button } from '@mui/material';
+import { Box, Grid, Avatar, Typography, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from '../../services/Redux/hooks';
 import { RootState } from '../../services/Redux/store';
@@ -9,9 +9,7 @@ export default function Profile() {
 	const user = useSelector((state: RootState) => state.user.user);
 	console.log(user);
 	const navigate = useNavigate();
-	const goBack = () => {
-		navigate(-1);
-	};
+	const goBack = () => navigate(-1);
 	const exitHandler = () => {
 		dispatch(clearUser());
 		navigate('/signin');
@@ -26,23 +24,21 @@ export default function Profile() {
 				<Button sx={{ marginRight: '20px' }} onClick={exitHandler}>
 					Выйти из учетной записи
 				</Button>
-				<Paper elevation={3} sx={{ p: 2 }}>
-					<Grid container spacing={2} alignItems='center'>
-						<Grid item xs={12} sm={3}>
-							<Avatar
-								alt={user.name || 'Аватар пользователя'}
-								src={user.avatar || 'путь-к-изображению-по-умолчанию'}
-								sx={{ width: 150, height: 150 }}
-							/>
-						</Grid>
-						<Grid item xs={12} sm={9}>
-							<Typography variant='h5'>{user.name}</Typography>
-							<Typography variant='subtitle1'>Email: {user.email}</Typography>
-							<Typography variant='subtitle1'>Группа: {user.group}</Typography>
-							<Typography variant='subtitle1'>О себе: {user.about}</Typography>
-						</Grid>
+				<Grid container spacing={2} alignItems='center'>
+					<Grid item xs={12} sm={3}>
+						<Avatar
+							alt={user.name || 'Аватар пользователя'}
+							src={user.avatar || 'путь-к-изображению-по-умолчанию'}
+							sx={{ width: 150, height: 150 }}
+						/>
 					</Grid>
-				</Paper>
+					<Grid item xs={12} sm={9}>
+						<Typography variant='h5'>{user.name}</Typography>
+						<Typography variant='subtitle1'>Email: {user.email}</Typography>
+						<Typography variant='subtitle1'>Группа: {user.group}</Typography>
+						<Typography variant='subtitle1'>О себе: {user.about}</Typography>
+					</Grid>
+				</Grid>
 			</Box>
 		</>
 	);

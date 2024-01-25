@@ -10,7 +10,7 @@ const production = process.env.NODE_ENV === 'production';
 module.exports = {
 	entry: path.resolve(__dirname, '..', './src/index.tsx'), //точка входа в наше приложение содержит абсолютный путь к index.ts
 	output: {
-		path: path.resolve(__dirname, '..', './public'), //путь куда будет собираться наш проект
+		path: path.resolve(__dirname, '..', './dist'), //путь куда будет собираться наш проект
 		filename: production
 			? 'static/scripts/[name].[contenthash].js'
 			: 'static/scripts/[name].js', // имя нашего бандла
@@ -86,6 +86,11 @@ module.exports = {
 			NODE_ENV: 'development', // значение по умолчанию 'development' если переменная process.env.NODE_ENV не передана
 			PUBLIC_PATH: '/psychic-waffle',
 			PUBLIC_URL: 'https://zebrooo.github.io/psychic-waffle/',
+		}),
+		new webpack.DefinePlugin({
+			'process.env.REACT_APP_PUBLIC_PATH': JSON.stringify(
+				process.env.PUBLIC_PATH
+			),
 		}),
 	],
 };

@@ -56,14 +56,19 @@ const ProductItem: FC<Product> = ({
 
 	function setNounForm() {
 		const num = reviews.length;
-		if (num === 1) {
-			return 'отзыв';
-		} else if (num === 3 || 5 || 4) {
-			return 'отзыва';
-		} else if (num >= 5) {
-			return 'отзывов';
-		} else {
-			return 'Нет отзывов';
+		switch (num) {
+			case 1:
+				return 'отзыв';
+
+			case 2:
+			case 3:
+			case 4:
+				return 'отзыва';
+			case 5:
+				return 'отзывов';
+
+			default:
+				return 'Нет отзывов';
 		}
 	}
 	const handleAddToCart = () => {

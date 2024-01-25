@@ -1,0 +1,14 @@
+version: '3.9'
+services:
+  product:
+    container_name: product
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: product-docker-optimal
+    ports:
+      - '3000:80'
+    env_file:
+      - .env
+
+# можно использовать либо build, либо image 

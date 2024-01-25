@@ -22,9 +22,6 @@ export function CloseIcon(props: SvgIconProps) {
 	);
 }
 
-// type TPostCardProps = {
-// } & Product;
-
 const Product: React.FC<Product> = ({
 	name,
 	price,

@@ -1,8 +1,8 @@
 import './styles.css';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import HomePage from '../pages/homePage';
 import Header from '../components/header';
 import Footer from '../components/footer';
-import { Navigate, Route, Routes } from 'react-router-dom';
 import NotFound from '../pages/404/NotFound';
 import Profile from '../pages/profile/Profile';
 import FavoritePage from '../pages/favoritePage/favoritePage';
