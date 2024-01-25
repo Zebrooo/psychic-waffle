@@ -1,11 +1,6 @@
 import { Container } from '@mui/material';
 import PostList from '../../components/post-list';
 
-// interface IHomePosts {
-// 	posts: Post[];
-// 	onPostDelete: (id: string) => void;
-// }
-
 const HomePage = () => {
 	return (
 		<>

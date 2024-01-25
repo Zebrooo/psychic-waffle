@@ -1,21 +1,24 @@
 import React, { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Card, CardHeader, CardMedia, Button } from '@mui/material';
-type ProductItemProps = {
-	setCart: (id: string) => void;
-} & Product;
+import { useDispatch } from '../../services/Redux/hooks';
+import { addToCart } from '../../services/Redux/reducers/cartReducer';
 
-const ProductItem: FC<ProductItemProps> = ({
-	_id,
-	discount,
-	pictures,
-	price,
-	wight,
+const ProductItem: FC<Product> = ({
 	name,
-	reviews,
+	price,
+	discount,
+	wight,
 	description,
-	setCart,
+	isFavorite,
+	isCart,
+	available,
+	stock,
+	pictures,
+	_id,
+	reviews,
 }) => {
+	const dispatch = useDispatch();
 	let discountNewContent;
 	if (discount) {
 		if (discount !== 0) {
@@ -26,7 +29,6 @@ const ProductItem: FC<ProductItemProps> = ({
 						backgroundColor: 'red',
 						color: 'white',
 					}}>
-					{' '}
 					- {discount} %
 				</div>
 			);
@@ -39,7 +41,7 @@ const ProductItem: FC<ProductItemProps> = ({
 
 	function getAllReviews() {
 		const components: any = [];
-		reviews?.map((review) => {
+		reviews?.map((review: any) => {
 			components.push(
 				<>
 					<div>
@@ -54,23 +56,33 @@ const ProductItem: FC<ProductItemProps> = ({
 
 	function setNounForm() {
 		const num = reviews.length;
-		switch (num) {
-			case 1:
-				return 'отзыв';
-
-			case 2:
-			case 3:
-			case 4:
-				return 'отзыва';
-			case 5:
-				return 'отзывов';
-
-			default:
-				return 'Нет отзывов';
+		if (num === 1) {
+			return 'отзыв';
+		} else if (num === 3 || 5 || 4) {
+			return 'отзыва';
+		} else if (num >= 5) {
+			return 'отзывов';
+		} else {
+			return 'Нет отзывов';
 		}
 	}
-	const addFavoriteHandle = (id: string) => {
-		setCart((prev)=> ...prev, id)
+	const handleAddToCart = () => {
+		dispatch(
+			addToCart({
+				name,
+				price,
+				discount,
+				wight,
+				description,
+				isFavorite,
+				isCart,
+				available,
+				stock,
+				pictures,
+				_id,
+				reviews,
+			})
+		);
 	};
 
 	return (
@@ -113,13 +125,6 @@ const ProductItem: FC<ProductItemProps> = ({
 								justifyContent: 'space-between',
 							}}>
 							<div>{discountNewContent}</div>
-							{/* <div>
-								<FavoriteBorderIcon
-									sx={{ color: setColorForIcon(likes, currentUser._id) }}
-									fontSize='small'
-								/>
-								{likes.length}
-							</div> */}
 						</div>
 
 						<CardMedia
@@ -141,15 +146,18 @@ const ProductItem: FC<ProductItemProps> = ({
 							margin: '40px',
 						}}>
 						<CardHeader title={`${price} P`} />
-						<Button
-							style={{
-								borderRadius: '20px',
-								backgroundColor: '#FFE44D',
-								color: 'black',
-								margin: '20px',
-							}}>
-							В корзину
-						</Button>
+						{stock && (
+							<Button
+								onClick={handleAddToCart}
+								style={{
+									borderRadius: '20px',
+									backgroundColor: '#FFE44D',
+									color: 'black',
+									margin: '20px',
+								}}>
+								В корзину
+							</Button>
+						)}
 						<div>
 							<h3>Описание:</h3>
 							<span>{description}</span>

@@ -7,10 +7,10 @@ import {
 	SvgIcon,
 	SvgIconProps,
 	CardActions,
-	Button,
 } from '@mui/material';
-// import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Link } from 'react-router-dom';
+import { useDispatch } from '../../services/Redux/hooks';
+import { addToCart } from '../../services/Redux/reducers/cartReducer';
 
 export function CloseIcon(props: SvgIconProps) {
 	return (
@@ -22,11 +22,10 @@ export function CloseIcon(props: SvgIconProps) {
 	);
 }
 
-type TPostCardProps = {
-	// onPostDelete: (id: string) => void;
-} & Product;
+// type TPostCardProps = {
+// } & Product;
 
-const Product: React.FC<TPostCardProps> = ({
+const Product: React.FC<Product> = ({
 	name,
 	price,
 	discount,
@@ -38,7 +37,9 @@ const Product: React.FC<TPostCardProps> = ({
 	stock,
 	pictures,
 	_id,
+	reviews,
 }) => {
+	const dispatch = useDispatch();
 	let discountNewContent;
 	if (discount !== 0) {
 		discountNewContent = (
@@ -54,6 +55,24 @@ const Product: React.FC<TPostCardProps> = ({
 	} else {
 		discountNewContent = null;
 	}
+	const handleAddToCart = () => {
+		dispatch(
+			addToCart({
+				name,
+				price,
+				discount,
+				wight,
+				description,
+				isFavorite,
+				isCart,
+				available,
+				stock,
+				pictures,
+				_id,
+				reviews,
+			})
+		);
+	};
 	return (
 		<>
 			<Card sx={{ maxWidth: 345 }}>
@@ -77,15 +96,18 @@ const Product: React.FC<TPostCardProps> = ({
 					</Typography>
 				</CardContent>
 				<CardActions>
-					<button
-						style={{
-							borderRadius: '20px',
-							backgroundColor: '#FFE44D',
-							color: 'black',
-							margin: '20px',
-						}}>
-						В корзину
-					</button>
+					{stock && (
+						<button
+							onClick={handleAddToCart}
+							style={{
+								borderRadius: '20px',
+								backgroundColor: '#FFE44D',
+								color: 'black',
+								margin: '20px',
+							}}>
+							В корзину
+						</button>
+					)}
 				</CardActions>
 			</Card>
 		</>

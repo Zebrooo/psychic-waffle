@@ -5,11 +5,7 @@ import Product from '../../components/product';
 import ProductItem from '../../components/product-item/ProductItem';
 import api from '../../services/api';
 
-interface SingleProductPageProps {
-	setCart: (id: string) => void;
-}
-
-export default function SingleProductPage({ setCart }: SingleProductPageProps) {
+export default function SingleProductPage() {
 	const [product, setProduct] = useState<Product | null>(null);
 	const { productId } = useParams();
 	useEffect(() => {
@@ -25,7 +21,7 @@ export default function SingleProductPage({ setCart }: SingleProductPageProps) {
 	return (
 		<>
 			<Container maxWidth='lg'>
-				<ProductItem setCart={setCart} {...(product as Product)} />
+				<ProductItem {...(product as Product)} />
 			</Container>
 		</>
 	);
