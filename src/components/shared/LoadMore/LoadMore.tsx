@@ -33,7 +33,6 @@ export default function LoadMore({
 			observer && observer.disconnect();
 		};
 	}, [action, isEndOfList]);
-	console.log(isEndOfList);
 	return (
 		<Stack
 			ref={ref}

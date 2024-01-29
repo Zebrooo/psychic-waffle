@@ -7,6 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
+import PetsIcon from '@mui/icons-material/Pets';
 
 interface HeaderProps {
 	children?: any;
@@ -18,7 +19,9 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
 			sx={{ backgroundColor: '#FFE44D', color: 'black' }}
 			position='static'>
 			<Toolbar>
-				<NavLink to='/home'>{'logo'}</NavLink>
+				<NavLink to='/home'>
+					<PetsIcon />
+				</NavLink>
 				<Box sx={{ flexGrow: 1 }} />
 				{children}
 				<Box sx={{ display: { xs: 'none', md: 'flex' } }}>

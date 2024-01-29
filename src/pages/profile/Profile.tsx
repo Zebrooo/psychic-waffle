@@ -1,5 +1,6 @@
 import { Box, Grid, Avatar, Typography, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useGetUserInfoQuery } from '../../services/Redux/ApiSlice/ApiSlice';
 import { useDispatch, useSelector } from '../../services/Redux/hooks';
 import { RootState } from '../../services/Redux/store';
 import { clearUser } from '../../services/Redux/userSlice/userSlice';
@@ -7,7 +8,6 @@ import { clearUser } from '../../services/Redux/userSlice/userSlice';
 export default function Profile() {
 	const dispatch = useDispatch();
 	const user = useSelector((state: RootState) => state.user.user);
-	console.log(user);
 	const navigate = useNavigate();
 	const goBack = () => navigate(-1);
 	const exitHandler = () => {

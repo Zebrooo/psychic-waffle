@@ -49,6 +49,9 @@ export const apiSlice = createApi({
 				body: userData,
 			}),
 		}),
+		getUserInfo: builder.query({
+			query: () => '/users/me',
+		}),
 		registerUser: builder.mutation({
 			query: (userData) => ({
 				url: '/signup',
@@ -60,6 +63,7 @@ export const apiSlice = createApi({
 });
 
 export const {
+	useGetUserInfoQuery,
 	useGetProductDataQuery,
 	useUserAuthorizationMutation,
 	useRegisterUserMutation,
